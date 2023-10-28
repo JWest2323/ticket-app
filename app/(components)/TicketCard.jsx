@@ -3,6 +3,22 @@ import PriorityDisplay from "./PriorityDisplay";
 import ProgressDisplay from "./ProgressDisplay";
 import StatusDisplay from "./StatusDisplay";
 
+const formatTimestamp = timestamp => {
+  const options = {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true
+  };
+
+  const date = new Date(timestamp);
+  const formattedDate = date.toLocaleDateString("en-US", options);
+
+  return formattedDate;
+};
+
 const TicketCard = ({ ticket }) => {
   return (
     <div className="flex flex-col bg-card hover:bg-card-hover rounded-md shadow-lg p-3 m-2">
@@ -18,7 +34,7 @@ const TicketCard = ({ ticket }) => {
       <div className="flex-grow"></div>
       <div className="flex mt-2">
         <div className="flex flex-col">
-          <p className="text-xs my-1">{ticket.createdAt}</p>
+          <p className="text-xs my-1">{formatTimestamp(ticket.createdAt)}</p>
           <ProgressDisplay progress={ticket.progress} />
         </div>
         <div className="ml-auto flex items-end">
